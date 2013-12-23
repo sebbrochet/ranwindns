@@ -69,7 +69,7 @@ def GetDNS_Zones(c):
         record_list = c.query(wql)
 
         def truncate_IFN(record):
-            return " ".join(record.split(" ")[:5])
+            return " ".join(record.split()[:5])
 
         return sorted([truncate_IFN(record.TextRepresentation) for record in record_list])
 
