@@ -67,7 +67,11 @@ def GetDNS_Zones(c):
     def get_record_for_zone(name):
         wql = "Select * from MicrosoftDNS_ResourceRecord where DomainName='%s'" % name
         record_list = c.query(wql)
-        return [record.TextRepresentation for record in record_list]
+
+        def truncate_IFN(record):
+            return " ".join(record.split(" ")[:5])
+
+        return sorted([truncate_IFN(record.TextRepresentation) for record in record_list])
 
     result = {}
 
